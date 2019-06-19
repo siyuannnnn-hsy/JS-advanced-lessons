@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //symbol不需要new
+    let s1=Symbol("s1");
+    let s2=Symbol("s2");
+    let s3=Symbol("s1");
+    console.log(s1==s3);//false
+
+    /*symbol作为对象的属性名 永远不会重复
+    对象[symbol]{
+        [symbol]:属性值
+    }
+    */
+    let obj={};
+    obj[s1]="hello";
+    let obj1={
+        [s2]:"world"
+    };
+    console.log(obj[s1]);//hello
+
+    /*
+    symbol.for()首先查看是否存在该描述信息的symbol变量
+    存在的话 直接获取
+    不存在的话会新建一个symbol
+    */
+    let a1=Symbol("foo");
+    console.log(Symbol.for("foo")==Symbol.for("foo"));
+
+
+    //Set需要new
+    let b1=new Set([1,2,3,4,5,5,6,2,2]);
+    console.log(b1);
+    for(var i of b1){
+        console.log(i);
+    }//1 2 3 4 5 6 不会添加重复的值
+
+    let m1=new Map([
+        ["usemane","zhangsan"],
+        ['age',28],
+        ['sex','male']
+    ]);
+    console.log(m1.size);//3
+    for(var i of m1){
+        console.log(i);
+    }//遍历数组
+    m1.set("weight","60kg");//添加
+    m1.get("usename");//通过键名获取
+    m1.delete("usename");//删除
+    m1.has("sex");//是否有这个属性
+    console.log(m1.keys());
+    for(var i of m1.keys()){
+        console.log(i)
+    }//遍历键名
+
+
+
+
+    //class类作为对象
+    class Point{
+        constructor(){
+            this.x=1;
+            this.y=2;
+        }
+        show(){
+            console.log(this.x);
+        }
+        showy(){
+            console.log(this.y);
+        }
+    }
+    console.log(typeof Point);//function
+    let p1=new Point();
+    let p2=new Point();
+    p1.show();//1
+    console.log(p1.__proto__==p2.__proto__);//true
+    console.log(p1);
+
+    class Point1{
+        constructor(){
+            this.x=11;
+        }
+        static showPoint(){
+            console.log(this);
+        }//添加静态方法 使用static 方法(){}
+    }
+    Point1.showPoint();//静态方法通过类来调用 静态方法内部的this指向类本身
+
+
+
+    //继承的实现方式
+    let obj2={"s":1};
+    let obj3=Object.create(obj2);
+    console.log(obj3.s);
+    
+    function fn1(){
+        this.x=2;
+    }
+    fn1.prototype.show=function(){
+        console.log(this.x);
+    }
+    let obj4=new fn1();
+    console.log(obj4);
+
+    function Child(x,y){
+        this.x=x;
+        this.y=y;
+    }
+    function Parent(x,y,z){
+        Child.call(this,x,y);
+        this.z=z;
+    }
+    let par1=new Parent(1,2,3);
+    console.log(par1);
+
+
+    /*
+        子类继承父类extends
+        在子类的构造函数里面super 指向父类的构造函数
+        继承的子类构造函数中，必须得在super()调用函数后才能使用this
+
+        super在子类的原型中 指向父类的prototype
+    */
+    class Parent1{
+        constructor(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        parentshow(){
+            console.log(this)
+        }
+    }
+    class Child1 extends Parent1{
+        constructor(x,y,z){
+            super(x,y);
+            this.z=z;
+        }
+        show(){
+            super.parentshow();
+            console.log(this);
+        }
+    }
+    let c1=new Child1(1,2,3);
+    console.log(c1);
+</script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function foo(x){
+        var tap=10;
+        return function(y){
+            console.log(x+y,++tap)
+        }
+    }
+    // var tap=10;
+    // function foo(){
+    //     return function(y){
+    //         console.log(y,++tap)
+    //     }
+    // }
+    var  fee=foo(10);
+    fee(10);
+    fee(10);
+    fee(10);
+
+    function counter(){
+        var n=0;
+        return {
+            count:function(){return ++n;},
+            reset:function(){n=0;return n;}
+        }
+    }
+    var c=counter(),d=counter();
+    console.log(c.count());
+    console.log(d.count());
+    console.log(c.reset());
+    console.log(c.count());
+    console.log(d.count());
+
+
+
+
+    //JS对象
+    //对象 instanceof 构造函数
+    //1.判断对象是否能够使改构造函数实例化得到
+    //2.判断对象的原型链上能够找到该构造函数的原型
+    //对象._proto_._proto_(长度不确定)==构造函数.prototype
+
+    console.log(Object instanceof Function);
+    console.log(Object._proto_==Function.prototype);
+
+    console.log(Object instanceof Object);
+    console.log(Object._proto_==Object.prototype);
+
+    function Preson(usename,age){
+        this.usename=usename;
+        this.age=age;
+    }
+    var p=new Preson("zhangsan",20);
+    console.log(p._proto_==Preson.prototype);
+
+
+    var o={
+        _x:1,
+        get x(){return this._x;},
+        set x(val){this._x=val;}
+    }
+    o.x=10;
+    console.log(o.x,o._x);
+</script>
+</html>

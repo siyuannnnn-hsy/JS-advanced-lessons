@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    console.log(a);//undefined
+    if(true){
+        var a=1;
+    }
+    console.log(a);//1
+
+    console.log(foo);//该种情况时，仅会对变量进行定义的提升
+    function foo(){
+        console.log("hello world");
+    }
+    //当function前有运算符的话，认定为表达式，不提升
+
+    var usename="jack";
+    function fun(){
+        usename="bill";
+        console.log(usename);
+    }
+    function bar(){
+        var usename="mike";
+        fun();
+        console.log(usename);
+    }
+    bar();// bill mike
+
+    //ES5没有块级作用域 只有函数的局部作用域
+</script>
+</html>

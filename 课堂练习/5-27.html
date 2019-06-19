@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <img src="1.png" alt="">
+    <span id="title"></span>
+    <button id="btn">jq ajax</button>
+</body>
+<script type="text/javascript">
+   /* for(var i=0;i<1000000;i++){
+
+    }
+    console.log("同步执行");
+
+        //不会阻塞主线程的执行，在满足待定条件时会反馈到主线程
+    
+    window.onload=function(){
+        console.log("页面加载完成");//异步执行
+    }
+    console.log("主程序");
+
+    var i=0;
+    var intervalId=setIntervak(function(){
+        console.log(i++);
+    },3000)*/
+
+    /*
+        在前端页面里面实现jQuery ajax请求 
+        ajax请求指明请求的后端程序的地址
+        后端程序接受请求做出相应
+        前端接受后端程序的响应内容 并在前端使用
+
+        前后端文件必须都放在服务器上面
+
+        ajax可以实现页面的局部刷新
+
+    */
+    $("#btn").click(function(){
+        $.ajax({
+            url:"./server.php",
+            type:"get",
+            success:function(data){
+                $("title").html(data);
+                console.log(data);
+            },
+            error:function(data){
+                console.log(err);
+            }
+        })
+    })
+</script>
+</html>

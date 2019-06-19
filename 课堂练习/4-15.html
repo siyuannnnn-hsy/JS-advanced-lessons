@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var obj1={z:1};
+    var obj2=Object.create(obj1);
+
+    console.log(obj1.__proto__==Object.prototype);//true
+    console.log(obj2.__proto__);//obj1
+    console.log(obj2.__proto__.__proto__);//obj1.__proto__
+    console.log(obj2.__proto__.__proto__.__proto__);//null
+
+
+
+
+    function Person(username,age){
+        this.username=username;
+        this.age=age;
+
+        // this.sayHi=function(){
+        //     console.log(this.username);
+        // }每实例化一次 创建一次 浪费空间
+    }
+    Person.prototype.sayHi=function(){
+        console.log(this.username);
+    }
+    var person1=new Person("zhangsan",30);
+    var person2=new Person("lisi",39);
+    console.log(person1.__proto__==Person.prototype);
+    console.log(person1.__proto__==person2.__proto__);
+    //person1和person2公用sayHi 节省空间
+    person1.sayHi();//调用构造函数的sayHi()
+    person2.sayHi();
+    //关系
+    console.log(person1.__proto__==Person.prototype);//true
+    console.log(Person.prototype.constructor==Person);//true
+    console.log(Person.prototype.__proto__==Object.prototype);//true
+    console.log(Object.prototype.constructor==Object);//true
+    console.log(Object.prototype.__proto__==null);//true
+
+
+    //定义一个车的对象（父对象），属性：heigth,width,weight
+    //创建一个小轿车的对象（继承车相关的属性），自身具有属性color,seatNum
+    //通过create方法，以及构造函数的形式
+    var car={
+        heigth:150,
+        width:200,
+        weight:2000
+    }//初始化对象
+
+    /*//create创造
+    var smallCar=Object.create(car);
+    smallCar.color="blue";
+    smallCar.seatNum=7;
+    console.log(smallCar);
+    */
+
+    //用构造函数的形式
+    function createSmallCar(color,seatNum){
+        this.color=color;
+        this.seatNum=seatNum;
+    }
+    createSmallCar.prototype=car;
+    var smallCar=new createSmallCar("red",7);
+    console.log(smallCar);
+
+    
+</script>
+</html>

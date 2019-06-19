@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//给多个属性设置特性的方法
+var obj={_x:1};
+Object.defineProperties(obj,{
+    y:{value:2,writable:true,enumerable:true},
+    z:{value:2,writable:true,enumerable:true},
+    x:{
+        get:function(){
+            return this._x;
+        },
+        set:function(val){
+            this._x=val;
+        }
+    }
+});
+</script>
+</html>

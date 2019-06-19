@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="usename">
+</body>
+<script>
+    function BaseClass(){
+
+    }
+    BaseClass.fn1=function(){
+        console.log("静态方法");
+    }
+    BaseClass.fn1();//静态方法是构造函数对象的方法。
+
+    BaseClass.prototype.fn2=function(){
+        console.log("原型方法");
+    }
+    var base=new BaseClass();
+    console.log(base.__proto__==BaseClass.prototype);
+    base.fn2();
+
+    function Person(useName,age){
+        this.useName=useName;
+        this.asge=age;
+    }
+    console.log(Person.prototype.constructor==Person);
+
+
+
+
+
+    /*(function(w,d){
+        function inputIdentify(inputId){
+            this._init(inputId);
+            this._effect();
+        }
+        inputIdentify.prototype._init=function(){
+            var inputObject=d.getElementById(inputId);
+            this.inputObject=inputObject;
+        };
+        inputIdentify.prototype._effect=function(){
+            this.inputObject.onblur=function(){
+                alert("失去焦点");
+            }
+            this.inputObject.onfocus=function(){
+                alert("获得焦点");
+            }
+        };
+        w.inputIdentify=inputIdentify;
+    })(window,document);
+    var input1=new inputIdentify("usename");
+    */
+
+
+    //数组
+    var arr1=['a','b','c','d'];
+    var arr2=arr1;
+    arr1[0]='e';
+    console.log(arr2);//e,b,c,d
+
+    var arr3=[,1,,3];
+    console.log(arr3.length);//4
+    Array.prototype.min=function(){
+        return "最小值";
+    }
+    for(var i in arr3){
+        console.log(i,arr3[i]);
+    }
+
+    //多维数组
+    var table=new Array(5);
+    for(var i=0;i<table.length;i++){
+        table[i]=new Array(5);
+    }
+    for(var row=0;row<table.lengthl;row++){
+        for(var col=0;col<table[row].length;col++){
+            table[row][col]=row*col;
+        }
+    }
+    var product=table[2][4];
+    console.log(table);
+</script>
+</html>

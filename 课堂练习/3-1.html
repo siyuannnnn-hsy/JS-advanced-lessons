@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	var object1={"usename":"zhangsan"};
+	var object2=object1;
+	object2.usename="list";
+	console.log(object1);
+
+	var arr1=[1,2,3,4];
+	var arr2=arr1;
+	arr2[0]=5;
+	console.log(arr1);
+
+	console.log(typeof 2);//检测类型方法
+
+	var num3=10;
+	var num4=10;
+	console.log(num3==num4);//基础数据类型 ==判断值是否相等 ===值和类型是否相等
+
+	var str="ab_cd_ef";
+	console.log(str.slice(0,2));//slice()
+	console.log(str.split("_"));//split(分隔符，生成数组的元素个数) 将字符串以特定分隔符分割，生成数组
+	console.log(str.substr(0,3));//substr(截取起始长度，截取结束长度)
+
+	//var str1=new String("abcdef");
+	var str2="abcdef";
+	console.log(str2.substr(0,2));//内部转化 装箱操作
+
+	console.log(Boolean(undefined));//false
+	console.log(Boolean(null));//false
+	console.log(Boolean(0));//false
+	console.log(Boolean(NaN));//false
+	console.log(Boolean(1));//true
+
+	console.log(Number(undefined));//Nan
+	console.log(Number(null));//0
+
+	
+</script>
+</html>

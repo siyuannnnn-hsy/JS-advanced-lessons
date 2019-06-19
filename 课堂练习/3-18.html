@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //对象 instanceof 构造函数 
+    //返回布尔类型
+    //1.判断这个对象能否使用后面的构造函数实例化得到
+    function Person(usename,age){
+        this.usename=usename;
+        this.age=age;
+    }
+    var person=new Person("zhangsan",20);
+    console.log(person instanceof Person);
+    console.log(person);
+    //2.判断能否在对象的原型链上找到构造函数的prototype
+    console.log(person._proto_==Person.prototype);
+    //3.判断能否在person的原型链上找到Object构造函数的prototype
+    console.log(person instanceof Object);
+
+
+
+    function fun(){
+        //arguments获取函数调用时，传入的实参，类数组结构
+        for (var i=0;i<arguments.length;i++){
+            console.log(arguments[i]);
+        }
+        //函数名.length表示形参的个数
+        console.log(fun.length);
+    }
+    fun(10,5,3);
+
+
+    function fn1(){
+        console.log(fn1.caller);
+    }
+    function fn2(){
+        fn1();
+    }
+    fn1();//null
+    fn2();//输出fn2的函数
+
+    var objA={"objName":"AAA"};
+    var objB={"objName":"BBB"};
+    objA.foo=function(){
+        console.log(this.objName);
+    }
+    objA.foo();
+    objA.foo.call(objB);//方法.call(对象)
+
+    function Person(usename){
+        this.usename=usename;
+        console.log(usename);
+    }
+    function Student(usename,age){
+        Person.call(this,usename);//方法.call(this,参数)；
+        this.age=age;
+        console.log(usename,age);
+    }
+    var person =new Person("zhangsan");//zhangsan
+    var student=new Student("lisi",20);//lisi,20
+
+
+
+    var objectA={
+        "objectName":"A",
+        "foo":function(){
+            console.log(this.objectName);
+        }
+    }
+    var objectB={"objectName":"B"};
+    var foo2=objectA.foo.bind(objectB);//bind与call类似，不同的是bind生成一个新的函数，需要调用新函数
+    foo2();
+
+
+    //高阶函数
+    var obj={x:3};
+    function fun1(){
+        function fun2(){
+            console.log(this.x);
+        }
+        return fun2;
+    }
+    obj.fun3=fun1;//fun3等于fun1
+    obj.fun4=fun1();//fun4等于的是fun1的执行结果
+    obj.fun3();//3
+    obj.fun4();
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function Person(username,age){
+        this.uesrname=username;
+        this.age=age;
+        
+    }
+    Person.prototype.sayHi=function(){
+        console.log(this.username);
+    }
+    var person1=new Person("zhangsan",30);
+    console.log(person1._proto_==Person.prototype);
+    var person2=new Person("lisi",18);
+    person1.sayHi();
+    person2.sayHi();
+
+
+
+
+    var obj={x:1,y:2};
+    Object.defineProperty(obj,'y',{enumerable:true});//enumerable设置可枚举性
+    for(var i in obj){
+        console.log(obj[i]);
+    }
+
+    var per={'name':"jack"};
+    Object.defineProperty(per,'name',{
+        writable:false,//writable设置name属性不可修改
+        configurable:false,//congigurable设置属性能否删除
+        enumerable:true,//enumerable设置能否枚举
+        value:"mike"//value定义属性值
+    });
+    per.name="lily";
+    console.log(per.name);
+    delete per.name;
+    console.log(per.name);
+    for(var i in per){
+        console.log(per.name);
+    }
+
+    var obj1={
+        _name:"jack"
+    }
+    Object.defineProperty(obj1,"name",{
+        configurable:true,
+        enumerable:true,
+        get(){
+            return this._name;
+        },
+        set(){
+            this._name=val;
+        }
+    })
+    console.log(obj1._name);
+</script>
+</html>

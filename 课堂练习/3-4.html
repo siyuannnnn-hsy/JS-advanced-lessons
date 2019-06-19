@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var num=10;
+    num.toString();
+    
+    var num=10;
+    var numObject=new Number(num);
+    numObject.toString();
+
+    num.p=10;
+    var t=num.p;
+    console.log(t);//undefined 基本数据类型会自动封装，包装成临时对象，临时对象用完后会自动释放。
+
+
+    var i=12345.6789;
+    console.log(i.toFixed(2));//保留小数，四舍五入
+    console.log(i.toPrecision(2));//转化为指数
+    console.log(i.toPrecision(3));
+    console.log(i.toPrecision(4));
+    console.log(i.toString());//将数字转换为一个字符串
+
+    //基本数据类型，变量__proto__属性
+    var str="abcdef";
+    console.log(str.charAt(2));//charAt()返回特定索引位置字符
+    console.log("B".localeCompare("A"));//字符串比较，返回0或非0
+    console.log(str.charCodeAt(2));//返回特定索引位置字符的Unicode码
+    console.log(str.slice(0,2));//截取，不包含end
+    console.log(str.substr(0));//substr(截取位置，截取长度)
+    console.log(str.substring(0,2));//截取，参数可选，若起始打于结束，就互换位置。
+    console.log(str.split("_"));//将字符串以特定字符分割，将数组元素生成数组
+    
+    var str1="      abc    d  ";
+    var str2="dahsdas";
+    console.log(str1.trim());//去除字符串两边空格，内部不去除
+    console.log(str1.concat(str1,str2));//连接
+
+   
+</script>
+</html>

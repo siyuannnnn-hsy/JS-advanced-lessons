@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function fn(){
+        var arr1=[];
+        for(var i=0;i<10;i++){
+            arr1[i]=function(){
+                return 1;
+            }
+        }
+        return arr1;
+    }
+    // fn();
+
+//定时器案例 延时执行
+    for(var i=0;i<3;i++){
+        (function(j){    //j=i
+            setTimeout(function(){
+                console.log(new Date,j);
+            },1000*i);
+        })(i);
+    }
+
+
+    //闭包
+    //函数通过返回函数内部定义的函数f2(),来访问f1()内部的局部变量
+    function f1(){
+        var x=3;
+        function f2(){
+            return ++x;
+        }
+        return f2;
+    }
+    var f3=f1();
+    console.log(f3());//4
+
+    function foo(){
+        var i=0;
+        function bar(){
+            console.log(++i);
+        }
+        return bar;
+    }
+    var a=foo();
+    var b=foo();
+    a();//1
+    a();//2
+    b();//1
+</script>
+</html>

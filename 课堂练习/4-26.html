@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //js的原型继承是对象——对象的继承
+    var superObj={
+        x:1,
+        y:2
+    };
+    var subObj_First=Object.create(superObj);
+    var subObj_Second=Object.create(superObj);
+    subObj_First.x=5;
+    console.log(subObj_Second.x);//1
+    subObj_First.__proto__.x=5;//改变的是原型上的X
+    console.log(subObj_Second.x);//5
+    subObj_First.x=5;
+    console.log(subObj_Second.x);//5
+
+
+    //构造函数 原型共享问题
+    function Person(name){
+        this.name=name;
+    };
+    Person.prototype.age=20;
+    Person.prototype.showName=function(){
+        console.log(this.name);
+    }
+    function Student(id){
+        this.id=id;
+    }
+    //person:name属性Mike，
+    //person.__proto__.age属性20
+    //person.__proto__.showName
+    Student.prototype=new Person("MIKE");
+    var s1=new Student(2017001);
+    var s2=new Student(2017002);
+    //s1自身上没有age，s1.__proto__=Student.prototype
+    //Student.prototype=new Person();person对象没有age属性
+    //s1.__proto__.__proto__=person.__proto__
+    //person.__proto__=Person.prototype
+    console.log(s1.id,s2.id);//2017001 2017001
+    console.log(s1.age,s2.age);//20 20
+    console.log(s1.name,s2.name);//MIKE MIKE
+
+
+    //模拟类——类继承的形式一
+    function Person1(name,age){
+        this.name=name;
+        this.age=age;
+    };
+    Person1.prototype.showName=function(){
+        console.log(this.name);
+    };
+    function Student1(name,age,id){
+        //切换的了Person函数内部的this的指向
+        Person1.call(this,name,age);
+        this.id=id;
+    }
+    Student1.prototype.__proto__=Person1.prototype;
+    var s11=new Student1("xxx",22,001);
+    var s22=new Student1("www",24,002);
+    console.log(s11.name,s22.name);//xxx www
+    console.log(s11.age,s22.age);//22 23
+    console.log(s11.id,s22.id);
+    s11.showName();
+    console.log(s11);
+
+    //模拟类——类继承的形式二
+    function Person2(name,age){
+        this.name=name;
+        this.age=age;
+    };
+    Person2.prototype.showName=function(){
+        console.log(this.name);
+    };
+    function Student2(name,age,id){
+        Person2.call(this,name,age);
+        this.id=id;
+    }
+    Student2.prototype=Object.create(Person2.prototype);
+    Student2.prototype.constructor=Student2;
+    var s111=new Student2("aaa",24,0011);
+    var s222=new Student2("bbb",23,0022);
+    console.log(s111.name,s222.name);//aaa bbb
+    console.log(s111.age,s222.age);//24 23
+    s111.showName();//aaa
+    console.log(s111);
+    
+</script>
+</html>

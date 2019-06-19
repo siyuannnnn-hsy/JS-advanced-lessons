@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //数组的解构赋值
+    let [one,,third]=[1,2,3];
+    console.log(third);//3
+
+    //  ...理解为剩余运算符，其他元素匹配完成后剩余下的元素
+    let [head,...tail]=[1,2,3,4];
+    console.log(head,tail);//1[2,3,4]
+
+    //当左侧的结构元素大于右侧时，未匹配到的变量会是undefined
+    //如果...没有匹配到元素 会是空的数组[]
+    let [d,e,...f]=['a'];
+    console.log(d,e,f);//a undefined []
+
+
+
+
+
+
+    //对象的解构赋值
+    let {bar,foo,other}={foo:"foo1",bar:"bar1",third:"111"};
+    console.log(bar,foo,other);//bar1 foo1 undefined 完全根据键名来匹配
+
+
+
+
+
+
+    //字符串的解构赋值
+    let str=new String("abcdef");
+    let [a,b,c]=str;
+    console.log(a,b,c);//a b c
+
+
+
+
+
+
+    //数字的解构赋值
+    var num=new Number(5);
+    let {toString:s1}=num;
+    console.log(s1);
+
+
+
+
+
+    //函数参数的解构赋值
+    function fn1({x=0,y=0}={}){
+        return [x,y];
+    }
+    console.log(fn1({x:3,y:4}));//[3,4]
+    console.log(fn1({x:3}));//[3,0]
+
+    //交换变量
+    var [a1,a2]=['a','b'];
+    [a2,a1]=[a1,a2];
+    console.log(a1,a2);//b a
+
+    //从函数中返回多个值
+    function example(){
+        return [1,2,3];
+    }
+    var [z1,z2,z3]=example();
+    console.log(z1,z2,z3);//1 2 3
+
+    //提取json数据
+    let json1={
+        "usename":"zhangsan",
+        "courseList":["高等数学","大学英语"],
+        "age":20
+    }
+    //JSON MATH都是对象 没有构造函数
+    let jsonStr=JSON.stringify(json1);
+    console.log(jsonStr);
+    json1=JSON.parse(jsonStr);
+    console.log(json1);
+    let {usename}=json1;
+    console.log(usename);//zhangsan
+
+
+
+
+
+
+    //对String的扩展
+    let str1="abcdef";
+    for(let i of str1){
+        console.log(i);
+    }//a b c d e f
+    str1.repeat(4);
+
+
+
+
+
+
+    //对RegExp正则表达式的扩展
+    let reg1=/xyz/gi;
+    let reg2=new RegExp("xyz",'gi');
+    // let reg2=new RegExp(/xyz/gi);
+    let reg3=new RegExp(/xyz/gi,'i');
+    //正则表达式对象.flags获取到正则表达式修饰符
+    console.log(reg1.flags);//gi
+
+    let str3="aaa_aa_a";
+    let reg4=/a+/g;//+表示出现的次数
+    console.log(reg4.exec(str3));//aaa index:0
+    console.log(reg4.exec(str3));//aa  index:4
+    //sticky y修饰符 它会从上一次匹配成功的结束位置开始匹配
+    let reg5=/a+/y;
+    console.log(reg5.exec(str3));//aaa index:0
+    console.log(reg5.exec(str3));//null 
+    console.log(reg5.lastIndex);//0 上一次匹配结果的索引位置
+    console.log(reg5.sticky);//true reg5是否设置了y
+
+
+
+
+
+    //Array数组的扩展
+    // Array.from 将类数组结构转化为数组
+    console.log(Array.from("abcdefg"));
+        function fn1(){
+            Array.from(arguments);
+        }
+        fn1(1,2,3);
+
+    // Array.of 将单个元素转化为数组
+    console.log(Array.of(1,2,3));
+
+    //复制数组里面的元素到数组的特定位置上
+    //arr1.copyWithin(target,start,end) target为复制的目标位置
+    var arr1=[1,2,3,4,5,6];
+    console.log(arr1.copyWithin(0,4,5));
+
+    //Array.prototype.find遍历数组中的元素，验证是否能满足回调函数里面的验证条件
+    //返回满足条件的第一个数组元素
+    let arr2=[10,15,20,30,40];
+    let el=arr2.find(function(element){
+        return element>19;
+    });
+    console.log(el);//20
+
+    //Array.prototype.findindex同上，但返回的是索引值
+    let elIndex=arr2.findIndex(function(element){
+        return element>19;
+    });
+    console.log(elIndex);//2
+
+    //fill(value,start,end)像数组特定的起始位置和结束位置之间填充value
+
+
+
+
+    //对Object的扩展
+    //ES6里面对象的结构进行了简化 属性可以写成变量的形式 函数省略function 函数名(){}
+    let name='lily';
+    let obj={
+        name,
+        fun1(){
+            console.log(this.name);
+        }
+    }
+    
+    let bar2="foo";
+    let obj2={
+        [bar2]:'male'
+    }
+    console.log(obj2);
+
+    let obj3={name2:'zhangsan'};
+    let obj4={age1:20};
+    //Object.assign合并
+    console.log(Object.assign(obj3,obj4));//{name2:'zhangsan',age"20};
+   
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var objA={name:"AA"};
+    var objB={name:"BB"};
+    objA.foo=function(){
+        console.log(this.name);
+    };
+    objA.foo();//AA
+    objA.foo.call(objB);//BB  call()和apply()间接调用
+
+    function test(){
+        var s="";
+        for(var i=0;i<arguments.length;i++){
+            s+=arguments[i];//当实参数量大于形参数量时，arguments获取所有参数
+        }
+        return s ;
+    }
+    console.log(test("hello,","world!"));//"hello,world!"
+
+
+    var obj={"username":"zhangsan",'age':20};
+    function copyArg(arg1){
+        switch(true){
+            case(arg1 instanceof String):
+                copy=arg1;
+                break;
+            case(arg1 instanceof Number):
+                copy=arg1;
+                break;
+            case(arg1 instanceof Boolean):
+                copy=arg1;
+                break;
+            case(arg1 instanceof Array):
+                copy=[];
+                for(var i=0;i<arg1.length;i++){
+                    copy[i]=arg1[i]
+                }
+                break;
+        }
+   }
+   //typeof 无法更细致的区分应用类型
+   //instanceof构造函数
+   //1.看这个对象是否用该构造函数实例化得到，得到的话结果为true
+   //2.
+
+</script>
+
+</html>
